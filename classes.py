@@ -14,7 +14,7 @@ class Category:
         self.products = products
 
         Category.count_category += 1
-        Category.count_unic_goods = len(set(self.products))
+        Category.count_unic_goods += len(set(self.products))
 
 
 class Product:
