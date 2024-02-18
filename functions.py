@@ -10,6 +10,7 @@ def load_json(file_name):
 
 
 def create_category(list_products):
+    """Функция для создания объектов классов с помещением объектов Товаров в класс Категорий"""
     list_category = []
     # list_products_category = []
     list_class_product = []
