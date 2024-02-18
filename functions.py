@@ -9,7 +9,7 @@ def load_json(file_name):
         return json.load(file)
 
 
-def load_category(list_products):
+def create_category(list_products):
     list_category = []
     # list_products_category = []
     list_class_product = []
