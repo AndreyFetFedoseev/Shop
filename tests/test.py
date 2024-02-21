@@ -27,7 +27,7 @@ def test_product_init(product_smart):
     """Тест класса Товар"""
     assert product_smart.name == 'Samsung'
     assert product_smart.description == 'Средство связи'
-    assert product_smart.price == 10000.50
+    assert product_smart.price1 == 10000.50
     assert product_smart.quantity == 27
 
 
@@ -54,7 +54,7 @@ def test_create_category():
     assert a[0].__products[0].name == 'Samsung Galaxy C23 Ultra'
     assert a[1].__products[0].name == '55" QLED 4K'
     assert a[0].__products[2].description == '1024GB, Синий'
-    assert a[0].__products[1].price == 210000.0
+    assert a[0].__products[1].price1 == 210000.0
     assert a[1].__products[0].quantity == 7
     assert Category.count_category == 3
     assert Category.count_unic_goods == 5
