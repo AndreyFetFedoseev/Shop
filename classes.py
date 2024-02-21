@@ -3,7 +3,7 @@ class Category:
 
     name: str
     description: str
-    _products: list
+    __products: list
 
     count_category = 0
     count_unic_goods = 0
@@ -11,19 +11,25 @@ class Category:
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self._products = products
+        self.__products = products
 
         Category.count_category += 1
-        Category.count_unic_goods += len(set(self._products))
+        Category.count_unic_goods += len(set(self.__products))
 
     @property
     def product(self):
-        for prod in self._products:
+        """
+        Выводит список товаров в классе Категории
+        """
+        for prod in self.__products:
             print(f'{prod.name}, {prod.price1} руб. Остаток: {prod.quantity} шт.')
         return None
 
     def add_product_in_category(self, class_product):
-        return self._products.append(class_product)
+        """
+        Добавляет в список класса Категории объект товара
+        """
+        return self.__products.append(class_product)
 
 
 class Product:
@@ -41,6 +47,10 @@ class Product:
 
     @classmethod
     def create_product(cls, name, description, price, quantity, list_products):
+        """
+        Создает объект товара и добавляет в список, а если совпадает название товара,
+        то добавляет только кол-во и выставляет большую цену
+        """
         product = cls(name, description, price, quantity)
         for goods in list_products:
             if product.name == goods.name:
@@ -57,6 +67,10 @@ class Product:
 
     @price.setter
     def price(self, new_price):
+        """
+        Метод при обращении без скобок,
+        который меняет цену товара
+        """
         if new_price > 0:
             if self.price1 > new_price:
                 solve = input('Если вы согласны понизить цену нажмите "y"').lower()
