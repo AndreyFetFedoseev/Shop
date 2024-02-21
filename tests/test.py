@@ -6,7 +6,8 @@ from functions import create_category
 
 @pytest.fixture
 def category_meat():
-    return Category('Филе курицы', 'Область грудки, очищенная от киля и кожи', ['Мясо'])
+    return Category('Филе курицы', 'Область грудки, очищенная от киля и кожи',
+                    ['мясо'])
 
 
 @pytest.fixture
@@ -18,7 +19,7 @@ def test_category_init(category_meat):
     """Тест класса Категория"""
     assert category_meat.name == 'Филе курицы'
     assert category_meat.description == 'Область грудки, очищенная от киля и кожи'
-    assert category_meat.__products == ['Мясо']
+    assert category_meat._Category__products == ['мясо']
     assert category_meat.count_category == 1
     assert category_meat.count_unic_goods == 1
 
@@ -51,10 +52,10 @@ def test_create_category():
     assert a[1].name == 'Телевизоры'
     assert a[
                0].description == 'Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни'
-    assert a[0].__products[0].name == 'Samsung Galaxy C23 Ultra'
-    assert a[1].__products[0].name == '55" QLED 4K'
-    assert a[0].__products[2].description == '1024GB, Синий'
-    assert a[0].__products[1].price1 == 210000.0
-    assert a[1].__products[0].quantity == 7
+    assert a[0]._Category__products[0].name == 'Samsung Galaxy C23 Ultra'
+    assert a[1]._Category__products[0].name == '55" QLED 4K'
+    assert a[0]._Category__products[2].description == '1024GB, Синий'
+    assert a[0]._Category__products[1].price1 == 210000.0
+    assert a[1]._Category__products[0].quantity == 7
     assert Category.count_category == 3
     assert Category.count_unic_goods == 5

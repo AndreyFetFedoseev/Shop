@@ -83,5 +83,6 @@ class Product:
 
     @price.deleter
     def price(self):
+        """Удаляет цену товара"""
         print('Цена неопределена')
         self.price1 = None
