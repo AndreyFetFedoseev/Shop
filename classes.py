@@ -80,3 +80,8 @@ class Product:
                 self.price1 = new_price
         else:
             print('Цена введена некорректная')
+
+    @price.deleter
+    def price(self):
+        print('Цена неопределена')
+        self.price1 = None
