@@ -58,8 +58,11 @@ class Product:
         for goods in list_products:
             if product.name == goods.name:
                 goods.quantity += product.quantity
-                if product.price1 > goods.price1:
-                    goods.price1 = product.price1
+                if product.price > goods.price:
+                    goods.price = product.price
+        for goods in list_products:
+            if product.name == goods.name:
+                break
         else:
             list_products.append(product)
         return product

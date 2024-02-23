@@ -20,12 +20,13 @@ c = Product.create_product('motos', 'vrrrr', 15000000, 4, a[0].products)
 print(c.price)
 a[0].products[3].price = 300000
 print(a[0].products[3].price)
-# d = Product.create_product('motor', 'vrr', 120000, 8, a[0].products)
+d = Product.create_product('motor', 'vrr', 120000, 8, a[0].products)
 # print(d[4].name)
-# e = Product.create_product('motor', 'vrr', 100000, 12, a[0].products)
+e = Product.create_product('motor', 'vrr', 150000, 12, a[0].products)
 # print(e[4].quantity)
 a[0].add_product_in_category(c)
 print(a[0].products[2].quantity)
 print(a[0].products[3].name)
 print(a[0].products[4].name)
+a[0].product
 
