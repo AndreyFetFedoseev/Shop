@@ -17,13 +17,16 @@ class Category:
         Category.count_unic_goods += len(set(self.__products))
 
     @property
+    def products(self):
+        return self.__products
+
+    @property
     def product(self):
         """
         Выводит список товаров в классе Категории
         """
         for prod in self.__products:
             print(f'{prod.name}, {prod.price1} руб. Остаток: {prod.quantity} шт.')
-        return None
 
     def add_product_in_category(self, class_product):
         """
@@ -59,7 +62,7 @@ class Product:
                     goods.price1 = product.price1
         else:
             list_products.append(product)
-        return list_products
+        return product
 
     @property
     def price(self):
