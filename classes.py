@@ -59,7 +59,7 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f'Название товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
+        return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
         return self.price * self.quantity + other.price * other.quantity
