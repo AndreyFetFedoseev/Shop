@@ -16,6 +16,16 @@ class Category:
         Category.count_category += 1
         Category.count_unic_goods += len(set(self.__products))
 
+    def __str__(self):
+        # return f'Категория: {self.name}\nКоличество товаров: {', '.join([x.name for x in self.products])}'
+        return f'Категория: {self.name}\nКоличество товаров: {len(self)}'
+
+    def __len__(self):
+        quant = 0
+        for prods in self.products:
+            quant += prods.quantity
+        return quant
+
     @property
     def products(self):
         return self.__products
@@ -47,6 +57,12 @@ class Product:
         self.description = description
         self.price1 = price
         self.quantity = quantity
+
+    def __str__(self):
+        return f'Название товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
+
+    def __add__(self, other):
+        return self.price * self.quantity + other.price * other.quantity
 
     @classmethod
     def create_product(cls, name, description, price, quantity, list_products):
