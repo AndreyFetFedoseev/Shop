@@ -27,3 +27,4 @@ a[0].product
 print(a[0])
 print(f'{c}\n{d}\n{b}')
 print(b + c)
+print(b + d)
