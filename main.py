@@ -1,5 +1,6 @@
 from classes import Category
 from classes import Product
+from classes import ViewCategory
 from functions import load_json
 from functions import create_category
 
@@ -27,3 +28,7 @@ a[0].product
 print(a[0])
 print(f'{c}\n{d}\n{b}')
 print(b + c)
+print(b + d)
+aa = ViewCategory(a[0])
+for x in aa:
+    print(x)

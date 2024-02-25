@@ -35,8 +35,10 @@ class Category:
         """
         Выводит список товаров в классе Категории
         """
+        str_product = ''
         for prod in self.__products:
-            print(f'{prod.name}, {prod.price1} руб. Остаток: {prod.quantity} шт.')
+            str_product += f'{prod.name}, {prod.price1} руб. Остаток: {prod.quantity} шт.' + '\n'
+        return str_product
 
     def add_product_in_category(self, class_product):
         """
@@ -108,3 +110,25 @@ class Product:
         """Удаляет цену товара"""
         print('Цена неопределена')
         self.price1 = None
+
+
+class ViewCategory:
+    """Класс для просмотра товаров в категории"""
+
+    def __init__(self, Category):
+        self.Category = Category
+
+    def __iter__(self):
+        self.current_index = -1
+        return self
+
+    def __next__(self):
+        # t = ''
+        # for x in self.Category.products:
+        #     t += x.name + '\n'
+        # return t
+        if self.current_index + 1 < len(self.Category.products):
+            self.current_index += 1
+            return self.Category.products[len(self.Category.products) - self.current_index - 1].name
+        else:
+            raise StopIteration
