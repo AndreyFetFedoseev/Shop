@@ -129,6 +129,6 @@ class ViewCategory:
         # return t
         if self.current_index + 1 < len(self.Category.products):
             self.current_index += 1
-            return self.Category.products[len(self.Category.products) - self.current_index - 1].name
+            return self.Category.products[self.current_index].name
         else:
             raise StopIteration
