@@ -32,3 +32,4 @@ print(b + d)
 aa = ViewCategory(a[0])
 for x in aa:
     print(x)
+# git rm -r --cached папка/

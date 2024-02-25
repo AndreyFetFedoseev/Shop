@@ -115,8 +115,8 @@ class Product:
 class ViewCategory:
     """Класс для просмотра товаров в категории"""
 
-    def __init__(self, Category):
-        self.Category = Category
+    def __init__(self, class_category):
+        self.class_category = class_category
 
     def __iter__(self):
         self.current_index = -1
@@ -127,8 +127,8 @@ class ViewCategory:
         # for x in self.Category.products:
         #     t += x.name + '\n'
         # return t
-        if self.current_index + 1 < len(self.Category.products):
+        if self.current_index + 1 < len(self.class_category.products):
             self.current_index += 1
-            return self.Category.products[self.current_index].name
+            return self.class_category.products[self.current_index].name
         else:
             raise StopIteration
