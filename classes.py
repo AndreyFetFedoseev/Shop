@@ -44,6 +44,8 @@ class Category:
         """
         Добавляет в список класса Категории объект товара
         """
+        if not isinstance(class_product, Product):
+            raise ValueError('Объект не принадлежит к классу Товар')
         return self.__products.append(class_product)
 
 
@@ -54,16 +56,19 @@ class Product:
     price: float
     quantity: int
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name, description, price, quantity, color=None):
         self.name = name
         self.description = description
         self.price1 = price
         self.quantity = quantity
+        self.color = color
 
     def __str__(self):
         return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
+        if not type(other) == type(self):
+            raise TypeError('Невозможно сложить, т.к. товары из разных категорий')
         return self.price * self.quantity + other.price * other.quantity
 
     @classmethod
@@ -115,20 +120,35 @@ class Product:
 class ViewCategory:
     """Класс для просмотра товаров в категории"""
 
-    def __init__(self, Category):
-        self.Category = Category
+    def __init__(self, class_category):
+        self.class_category = class_category
 
     def __iter__(self):
         self.current_index = -1
         return self
 
     def __next__(self):
-        # t = ''
-        # for x in self.Category.products:
-        #     t += x.name + '\n'
-        # return t
-        if self.current_index + 1 < len(self.Category.products):
+        if self.current_index + 1 < len(self.class_category.products):
             self.current_index += 1
-            return self.Category.products[self.current_index].name
+            return self.class_category.products[self.current_index].name
         else:
             raise StopIteration
+
+
+class Smartphone(Product):
+    """Категория товара 'Смартфоны'"""
+
+    def __init__(self, name, description, price, quantity, color, efficiency, model, internal_memory):
+        super().__init__(name, description, price, quantity, color)
+        self.efficiency = efficiency
+        self.model = model
+        self.internal_memory = internal_memory
+
+
+class LawnGrass(Product):
+    """Категория товара 'Трава газонная'"""
+
+    def __init__(self, name, description, price, quantity, color, country_origin, germination_period):
+        super().__init__(name, description, price, quantity, color)
+        self.country_origin = country_origin
+        self.germination_period = germination_period
