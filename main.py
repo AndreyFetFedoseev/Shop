@@ -46,4 +46,4 @@ g = LawnGrass('Чернозем', 'Плодородная', 50000, 2, 'black', '
 # print(f + g)
 # print(g + f)
 print(g + g)
-a[0].add_product_in_category(a)
+# a[0].add_product_in_category(a)
