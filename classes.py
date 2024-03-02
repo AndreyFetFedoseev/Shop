@@ -54,11 +54,12 @@ class Product:
     price: float
     quantity: int
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name, description, price, quantity, color=None):
         self.name = name
         self.description = description
         self.price1 = price
         self.quantity = quantity
+        self.color = color
 
     def __str__(self):
         return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
@@ -132,3 +133,22 @@ class ViewCategory:
             return self.class_category.products[self.current_index].name
         else:
             raise StopIteration
+
+
+class Smartphone(Product):
+    """Категория товара 'Смартфоны'"""
+
+    def __init__(self, name, description, price, quantity, color, efficiency, model, internal_memory):
+        super().__init__(name, description, price, quantity, color)
+        self.efficiency = efficiency
+        self.model = model
+        self.internal_memory = internal_memory
+
+
+class LawnGrass(Product):
+    """Категория товара 'Трава газонная'"""
+
+    def __init__(self, name, description, price, quantity, color, country_origin, germination_period):
+        super().__init__(name, description, price, quantity, color)
+        self.country_origin = country_origin
+        self.germination_period = germination_period
