@@ -44,6 +44,8 @@ class Category:
         """
         Добавляет в список класса Категории объект товара
         """
+        if not isinstance(class_product, Product):
+            raise ValueError('Объект не принадлежит к классу Товар')
         return self.__products.append(class_product)
 
 
@@ -65,6 +67,8 @@ class Product:
         return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
+        if not type(other) == type(self):
+            raise TypeError('Невозможно сложить, т.к. товары из разных категорий')
         return self.price * self.quantity + other.price * other.quantity
 
     @classmethod
@@ -124,10 +128,6 @@ class ViewCategory:
         return self
 
     def __next__(self):
-        # t = ''
-        # for x in self.Category.products:
-        #     t += x.name + '\n'
-        # return t
         if self.current_index + 1 < len(self.class_category.products):
             self.current_index += 1
             return self.class_category.products[self.current_index].name

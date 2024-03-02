@@ -1,5 +1,7 @@
 from classes import Category
 from classes import Product
+from classes import Smartphone
+from classes import LawnGrass
 from classes import ViewCategory
 from functions import load_json
 from functions import create_category
@@ -33,3 +35,15 @@ aa = ViewCategory(a[0])
 for x in aa:
     print(x)
 # git rm -r --cached папка/
+f = Smartphone('Huawei', 'Прекрасен', 40000, 36,'black', 'Бешеная', 'P40', 128)
+# print(f + d)
+print(f + f)
+# print(d + f)
+print(d + d)
+# print(a + d)
+# print(d + a)
+g = LawnGrass('Чернозем', 'Плодородная', 50000, 2, 'black', 'Russia', 'Faster')
+# print(f + g)
+# print(g + f)
+print(g + g)
+a[0].add_product_in_category(a)
