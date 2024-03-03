@@ -1,4 +1,51 @@
-class Category:
+from abc import ABC, abstractmethod
+
+
+class SampleProduct(ABC):
+    """Абстрактный класс для создания классов Товаров"""
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @classmethod
+    @abstractmethod
+    def create_product(cls, name, description, price, quantity, list_products):
+        pass
+
+    @property
+    @abstractmethod
+    def price(self):
+        pass
+
+    @price.setter
+    @abstractmethod
+    def price(self, new_price):
+        pass
+
+    @price.deleter
+    @abstractmethod
+    def price(self):
+        pass
+
+
+class MixinRepr:
+    """Общий вывод для всех классов"""
+
+    def __init__(self, name, description, products):
+        self.name = name
+        self.description = description
+        self.__products = products
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", "{self.description}", "{self.__products}")'
+
+
+class Category(MixinRepr):
     """Категории под товары"""
 
     name: str
@@ -9,8 +56,9 @@ class Category:
     count_unic_goods = 0
 
     def __init__(self, name, description, products):
-        self.name = name
-        self.description = description
+        super().__init__(name, description)
+        # self.name = name
+        # self.description = description
         self.__products = products
 
         Category.count_category += 1
@@ -49,7 +97,7 @@ class Category:
         return self.__products.append(class_product)
 
 
-class Product:
+class Product(SampleProduct):
     """Товар в магазине"""
     name: str
     description: str

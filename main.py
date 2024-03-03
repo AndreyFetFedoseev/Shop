@@ -1,5 +1,7 @@
 from classes import Category
 from classes import Product
+from classes import SampleProduct
+from classes import MixinRepr
 from classes import Smartphone
 from classes import LawnGrass
 from classes import ViewCategory
@@ -47,3 +49,4 @@ g = LawnGrass('Чернозем', 'Плодородная', 50000, 2, 'black', '
 # print(g + f)
 print(g + g)
 # a[0].add_product_in_category(a)
+print(a)
