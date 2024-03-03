@@ -42,7 +42,7 @@ class MixinRepr:
         self.__products = products
 
     def __repr__(self):
-        return f'{self.__class__.__name__}("{self.name}", "{self.description}", "{self.__products}")'
+        return f'{self.__class__.__name__}("{self.name}", "{self.description}", "{', '.join([x.name for x in self.__products])}")'
 
 
 class Category(MixinRepr):
@@ -56,7 +56,7 @@ class Category(MixinRepr):
     count_unic_goods = 0
 
     def __init__(self, name, description, products):
-        super().__init__(name, description)
+        super().__init__(name, description, products)
         # self.name = name
         # self.description = description
         self.__products = products
