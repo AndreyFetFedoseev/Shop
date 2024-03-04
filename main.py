@@ -47,3 +47,8 @@ g = LawnGrass('Чернозем', 'Плодородная', 50000, 2, 'black', '
 # print(g + f)
 print(g + g)
 # a[0].add_product_in_category(a)
+print(a)
+print(repr(b))
+print(repr(g))
+h = Category('Grass', 'Feromont', [g])
+print(repr(h))
