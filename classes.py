@@ -1,4 +1,58 @@
-class Category:
+from abc import ABC, abstractmethod
+
+
+class SampleProduct(ABC):
+    """Абстрактный класс для создания классов Товаров"""
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @classmethod
+    @abstractmethod
+    def create_product(cls, name, description, price, quantity, list_products):
+        pass
+
+    @property
+    @abstractmethod
+    def price(self):
+        pass
+
+    @price.setter
+    @abstractmethod
+    def price(self, new_price):
+        pass
+
+    @price.deleter
+    @abstractmethod
+    def price(self):
+        pass
+
+
+class MixinRepr:
+    """Общий вывод для всех классов"""
+
+    def __repr__(self):
+        """Описание создания экземпляра класса"""
+
+        dict_attr = vars(self)
+        list_attribute = []
+        for attribute in dict_attr.values():
+            if type(attribute) is int or type(attribute) is float:
+                list_attribute.append(str(attribute))
+            elif attribute is None:
+                continue
+            else:
+                list_attribute.append(f"'{attribute}'")
+        str_repr = ', '.join(list_attribute)
+        return f'{self.__class__.__name__}({str_repr})'
+
+
+class Category(MixinRepr):
     """Категории под товары"""
 
     name: str
@@ -17,7 +71,6 @@ class Category:
         Category.count_unic_goods += len(set(self.__products))
 
     def __str__(self):
-        # return f'Категория: {self.name}\nКоличество товаров: {', '.join([x.name for x in self.products])}'
         return f'Категория: {self.name}\nКоличество товаров: {len(self)}'
 
     def __len__(self):
@@ -49,7 +102,7 @@ class Category:
         return self.__products.append(class_product)
 
 
-class Product:
+class Product(SampleProduct, MixinRepr):
     """Товар в магазине"""
     name: str
     description: str
@@ -67,7 +120,7 @@ class Product:
         return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
-        if not type(other) == type(self):
+        if not type(other) is type(self):
             raise TypeError('Невозможно сложить, т.к. товары из разных категорий')
         return self.price * self.quantity + other.price * other.quantity
 
@@ -117,7 +170,7 @@ class Product:
         self.price1 = None
 
 
-class ViewCategory:
+class ViewCategory(MixinRepr):
     """Класс для просмотра товаров в категории"""
 
     def __init__(self, class_category):
@@ -135,7 +188,7 @@ class ViewCategory:
             raise StopIteration
 
 
-class Smartphone(Product):
+class Smartphone(Product, MixinRepr):
     """Категория товара 'Смартфоны'"""
 
     def __init__(self, name, description, price, quantity, color, efficiency, model, internal_memory):
@@ -145,7 +198,7 @@ class Smartphone(Product):
         self.internal_memory = internal_memory
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, MixinRepr):
     """Категория товара 'Трава газонная'"""
 
     def __init__(self, name, description, price, quantity, color, country_origin, germination_period):
