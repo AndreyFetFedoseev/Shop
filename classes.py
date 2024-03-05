@@ -36,9 +36,11 @@ class SampleProduct(ABC):
 class MixinRepr:
     """Общий вывод для всех классов"""
 
+    def __init__(self):
+        print(repr(self))
+
     def __repr__(self):
         """Описание создания экземпляра класса"""
-
         dict_attr = vars(self)
         list_attribute = []
         for attribute in dict_attr.values():
@@ -69,6 +71,7 @@ class Category(MixinRepr):
 
         Category.count_category += 1
         Category.count_unic_goods += len(set(self.__products))
+        super().__init__()
 
     def __str__(self):
         return f'Категория: {self.name}\nКоличество товаров: {len(self)}'
@@ -115,6 +118,7 @@ class Product(SampleProduct, MixinRepr):
         self.price1 = price
         self.quantity = quantity
         self.color = color
+        super().__init__()
 
     def __str__(self):
         return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
@@ -175,6 +179,7 @@ class ViewCategory(MixinRepr):
 
     def __init__(self, class_category):
         self.class_category = class_category
+        super().__init__()
 
     def __iter__(self):
         self.current_index = -1
