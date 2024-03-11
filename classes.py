@@ -102,8 +102,10 @@ class Category(MixinRepr):
         """
         if not isinstance(class_product, Product):
             raise ValueError('Объект не принадлежит к классу Товар')
-        return self.__products.append(class_product)
-
+        if class_product.quantity > 0:
+            return self.__products.append(class_product)
+        else:
+            raise ValueError('Товар с нулевым кол-ом не может быть добавлен')
 
 class Product(SampleProduct, MixinRepr):
     """Товар в магазине"""
@@ -134,7 +136,10 @@ class Product(SampleProduct, MixinRepr):
         Создает объект товара и добавляет в список, а если совпадает название товара,
         то добавляет только кол-во и выставляет большую цену
         """
-        product = cls(name, description, price, quantity)
+        if quantity > 0:
+            product = cls(name, description, price, quantity)
+        else:
+            raise ValueError('Товар с нулевым кол-ом не может быть добавлен')
         for goods in list_products:
             if product.name == goods.name:
                 goods.quantity += product.quantity

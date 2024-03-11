@@ -15,8 +15,11 @@ def create_category(list_products):
     list_class_product = []
     for dict_category in list_products:
         for product in dict_category['products']:
-            class_product = Product(product['name'], product['description'], product['price'], product['quantity'])
-            list_class_product.append(class_product)
+            if product['quantity'] > 0:
+                class_product = Product(product['name'], product['description'], product['price'], product['quantity'])
+                list_class_product.append(class_product)
+            else:
+                raise ValueError('Товар с нулевым кол-ом не может быть добавлен')
         class_category = Category(dict_category['name'], dict_category['description'], list_class_product)
         list_category.append(class_category)
         list_class_product = []
