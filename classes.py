@@ -36,9 +36,11 @@ class SampleProduct(ABC):
 class MixinRepr:
     """Общий вывод для всех классов"""
 
+    def __init__(self):
+        print(repr(self))
+
     def __repr__(self):
         """Описание создания экземпляра класса"""
-
         dict_attr = vars(self)
         list_attribute = []
         for attribute in dict_attr.values():
@@ -69,6 +71,7 @@ class Category(MixinRepr):
 
         Category.count_category += 1
         Category.count_unic_goods += len(set(self.__products))
+        super().__init__()
 
     def __str__(self):
         return f'Категория: {self.name}\nКоличество товаров: {len(self)}'
@@ -99,7 +102,22 @@ class Category(MixinRepr):
         """
         if not isinstance(class_product, Product):
             raise ValueError('Объект не принадлежит к классу Товар')
-        return self.__products.append(class_product)
+        if class_product.quantity > 0:
+            return self.__products.append(class_product)
+        else:
+            raise ValueError('Товар с нулевым кол-ом не может быть добавлен')
+
+    def average_price(self):
+        sum_product = 0
+        try:
+            for product in self.__products:
+                sum_product += product.price
+            average_price = sum_product / len(self.__products)
+        except ZeroDivisionError:
+            print('В категории нет товаров')
+            return 0
+        else:
+            return average_price
 
 
 class Product(SampleProduct, MixinRepr):
@@ -115,6 +133,7 @@ class Product(SampleProduct, MixinRepr):
         self.price1 = price
         self.quantity = quantity
         self.color = color
+        super().__init__()
 
     def __str__(self):
         return f'Наименование товара: {self.name}, {self.price} руб., Остаток: {self.quantity} шт.'
@@ -130,7 +149,10 @@ class Product(SampleProduct, MixinRepr):
         Создает объект товара и добавляет в список, а если совпадает название товара,
         то добавляет только кол-во и выставляет большую цену
         """
-        product = cls(name, description, price, quantity)
+        if quantity > 0:
+            product = cls(name, description, price, quantity)
+        else:
+            raise ValueError('Товар с нулевым кол-ом не может быть добавлен')
         for goods in list_products:
             if product.name == goods.name:
                 goods.quantity += product.quantity
@@ -175,6 +197,7 @@ class ViewCategory(MixinRepr):
 
     def __init__(self, class_category):
         self.class_category = class_category
+        super().__init__()
 
     def __iter__(self):
         self.current_index = -1
