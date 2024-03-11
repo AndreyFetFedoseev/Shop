@@ -107,6 +107,19 @@ class Category(MixinRepr):
         else:
             raise ValueError('Товар с нулевым кол-ом не может быть добавлен')
 
+    def average_price(self):
+        sum_product = 0
+        try:
+            for product in self.__products:
+                sum_product += product.price
+            average_price = sum_product / len(self.__products)
+        except ZeroDivisionError:
+            print('В категории нет товаров')
+            return 0
+        else:
+            return average_price
+
+
 class Product(SampleProduct, MixinRepr):
     """Товар в магазине"""
     name: str
